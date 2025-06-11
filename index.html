@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statbench | The Future of Youth Soccer Rankings</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #00ff88;
+      --primary-dark: #00cc6f;
+      --bg-dark: #0a0f1c;
+      --bg-darker: #050a12;
+      --text-primary: #ffffff;
+      --text-secondary: #8892a0;
+      --accent: #64ffda;
+      --card-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(100, 255, 218, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(0, 204, 111, 0.08) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(-20px, -20px) rotate(1deg); }
+      66% { transform: translate(20px, -10px) rotate(-1deg); }
+    }
+
+    /* Grid background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo */
+    .logo-container {
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .logo {
+      width: 180px;
+      height: auto;
+      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3));
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Main heading */
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        white-space: normal;
+      }
+    }
+
+    /* Animated badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+      50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); }
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Taglines */
+    .tagline {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      max-width: 700px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .tagline.primary {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 255, 136, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1);
+    }
+
+    .feature-card:hover::before {
+      transform: translateX(0);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Email signup */
+    .signup-section {
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .email-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .email-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .email-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+    }
+
+    .submit-btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 12px;
+      color: var(--bg-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+    }
+
+    .submit-btn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .signup-form {
+        flex-direction: column;
+      }
+
+      .submit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <div class="grid-bg"></div>
+  
+  <div class="container">
+    <div class="logo-container">
+      <img src="statbench-logo.png" alt="Statbench" class="logo">
+    </div>
+    
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>Now in Beta</span>
+    </div>
+    
+    <h1>Youth Soccer Rankings, Redefined.</h1>
+    <p class="tagline primary">Built on Results, Not Reputation.</p>
+    <p class="tagline">Introducing the <strong>Statbench Score™</strong> — a revolutionary performance-based system that gives every team and club a persistent score based on real match results, updated daily across multiple national platforms.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Daily Updates</h3>
+        <p class="feature-desc">Fresh scores every day as new match results are processed and analyzed</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3 class="feature-title">Nationwide Coverage</h3>
+        <p class="feature-desc">Tracking leagues and tournaments across all major platforms nationwide</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Team + Club Rankings</h3>
+        <p class="feature-desc">Comprehensive scores for individual teams and entire club programs</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3 class="feature-title">Transparent Logic</h3>
+        <p class="feature-desc">Clear, understandable scoring methodology you can trust</p>
+      </div>
+    </div>
+    
+    <div class="signup-section">
+      <form action="https://formspree.io/f/mrbkqpve" method="post" class="signup-form">
+        <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input">
+        <button type="submit" class="submit-btn">Get Early Access</button>
+      </form>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Statbench. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
