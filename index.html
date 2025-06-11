@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+@media (max-width: 768px) {
+        .logo-text {
+          font-size: 2.5rem;
+        }
+      }<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -85,23 +89,30 @@
       position: relative;
     }
 
-    .logo {
-      width: 400px;
-      max-width: 80vw;
-      height: auto;
-      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3));
+    .logo-text {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      position: relative;
+      display: inline-block;
       animation: pulse 3s ease-in-out infinite;
     }
 
-    @media (max-width: 768px) {
-      .logo {
-        width: 300px;
-      }
+    .logo-text::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0.8;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.02); opacity: 0.95; }
     }
 
     /* Main heading */
@@ -371,7 +382,7 @@
   
   <div class="container">
     <div class="logo-container">
-      <img src="statbench-logo.png" alt="Statbench" class="logo">
+      <div class="logo-text">Statbench</div>
     </div>
     
     <div class="badge">
