@@ -30,428 +30,498 @@
     }
 
     :root {
-      --primary-green: #2ECC71;
-      --primary-yellow: #F39C12;
-      --primary-orange: #E67E22;
-      --bg-dark: #1a1a1a;
-      --bg-darker: #0f0f0f;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0a0;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --accent-gradient: linear-gradient(135deg, #2ECC71, #F39C12, #E67E22);
+      --green: #2ECC71;
+      --yellow: #F39C12;
+      --orange: #E67E22;
+      --dark: #0D0D0D;
+      --gray: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --text: #ffffff;
+      --text-dim: #888888;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-primary);
+      background: var(--dark);
+      color: var(--text);
       overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Animated background */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 20%, rgba(230, 126, 34, 0.08) 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(-20px, -20px) rotate(1deg); }
-      66% { transform: translate(20px, -10px) rotate(-1deg); }
-    }
-
-    /* Grid background */
-    .grid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: -1;
-      opacity: 0.5;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Logo */
-    .logo-container {
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .logo-img {
-      width: 400px;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 10px 30px rgba(46, 204, 113, 0.3));
-      animation: pulse 3s ease-in-out infinite;
-      margin: 0 auto;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.9; }
-    }
-
-    /* Main heading */
-    h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-    }
-
-    /* Animated badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(46, 204, 113, 0.1);
-      border: 1px solid rgba(46, 204, 113, 0.3);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.2); }
-      50% { box-shadow: 0 0 30px rgba(46, 204, 113, 0.4); }
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--primary-green);
-      border-radius: 50%;
-      animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Taglines */
-    .tagline {
-      font-size: 1.25rem;
-      font-weight: 300;
-      margin-bottom: 1rem;
-      max-width: 700px;
-      color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    .tagline.primary {
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      z-index: 1;
+      pointer-events: none;
+      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIgLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMSIgLz48L3N2Zz4=');
     }
 
-    .tagline strong {
-      background: var(--accent-gradient);
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      background: rgba(13, 13, 13, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .beta-pill {
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 10rem 2rem 6rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content h1 .gradient {
+      background: linear-gradient(135deg, var(--green), var(--yellow), var(--orange));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Features grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin: 3rem 0;
-      width: 100%;
-      max-width: 900px;
+    .hero-content p {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+      max-width: 500px;
     }
 
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 2rem;
+    /* CTA Section */
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: #27AE60;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--light-gray);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* Visual Section */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-card {
+      background: var(--gray);
+      border-radius: 20px;
+      padding: 3rem;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
-    .feature-card::before {
+    .visual-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: var(--accent-gradient);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange));
     }
 
-    .feature-card:hover {
+    .stat-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: var(--light-gray);
+      border-radius: 12px;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .stat-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--light-gray);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .stat-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      background: var(--gray);
+      position: relative;
+    }
+
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    .features-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .features-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature {
+      background: var(--light-gray);
+      padding: 2rem;
+      border-radius: 16px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .feature:hover {
       transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(46, 204, 113, 0.3);
-      box-shadow: 0 10px 40px rgba(46, 204, 113, 0.1);
-    }
-
-    .feature-card:hover::before {
-      transform: translateX(0);
+      background: rgba(42, 42, 42, 0.8);
     }
 
     .feature-icon {
       width: 48px;
       height: 48px;
-      margin-bottom: 1rem;
-      background: var(--accent-gradient);
+      background: var(--gray);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 1.5rem;
       font-size: 1.5rem;
     }
 
-    .feature-card:nth-child(1) .feature-icon {
-      background: var(--primary-green);
+    .feature:nth-child(1) .feature-icon { background: rgba(46, 204, 113, 0.2); color: var(--green); }
+    .feature:nth-child(2) .feature-icon { background: rgba(243, 156, 18, 0.2); color: var(--yellow); }
+    .feature:nth-child(3) .feature-icon { background: rgba(230, 126, 34, 0.2); color: var(--orange); }
+    .feature:nth-child(4) .feature-icon { background: rgba(46, 204, 113, 0.2); color: var(--green); }
+
+    .feature h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
     }
 
-    .feature-card:nth-child(2) .feature-icon {
-      background: var(--primary-yellow);
+    .feature p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
     }
 
-    .feature-card:nth-child(3) .feature-icon {
-      background: var(--primary-orange);
+    /* Email Capture */
+    .email-capture {
+      padding: 6rem 2rem;
+      text-align: center;
     }
 
-    .feature-card:nth-child(4) .feature-icon {
-      background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .feature-title {
+    .email-capture h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .email-capture p {
+      color: var(--text-dim);
       font-size: 1.125rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
+      margin-bottom: 2rem;
     }
 
-    .feature-desc {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Email signup */
-    .signup-section {
-      margin-top: 3rem;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .signup-form {
+    .email-form {
       display: flex;
-      gap: 0.75rem;
-      margin-top: 2rem;
-      position: relative;
+      gap: 1rem;
+      max-width: 450px;
+      margin: 0 auto;
     }
 
     .email-input {
       flex: 1;
       padding: 1rem 1.5rem;
+      background: var(--gray);
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      color: var(--text);
       font-size: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      color: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .email-input::placeholder {
-      color: var(--text-secondary);
     }
 
     .email-input:focus {
       outline: none;
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--primary-green);
-      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
-    }
-
-    .submit-btn {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      background: var(--accent-gradient);
-      border: none;
-      border-radius: 12px;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);
-    }
-
-    .submit-btn:active::before {
-      width: 300px;
-      height: 300px;
+      border-color: var(--green);
     }
 
     /* Footer */
-    .footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    footer {
+      padding: 3rem 2rem;
       text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer p {
+      color: var(--text-dim);
       font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .footer a {
-      color: var(--primary-green);
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .footer a:hover {
-      opacity: 0.8;
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        white-space: normal;
-      }
-
-      .features-grid {
+    @media (max-width: 1024px) {
+      .hero {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        text-align: center;
+        padding: 8rem 2rem 4rem;
       }
 
-      .feature-card {
-        padding: 1.5rem;
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .signup-form {
+      .cta-group {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .email-form {
         flex-direction: column;
       }
 
-      .submit-btn {
+      .btn {
         width: 100%;
+        justify-content: center;
       }
 
-      .logo-img {
-        width: 280px;
+      .hero-content h1 {
+        font-size: 2.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-animation"></div>
-  <div class="grid-bg"></div>
-  
-  <div class="container">
-    <div class="logo-container">
-      <img src="statbench-logo.png" alt="Statbench" class="logo-img">
-    </div>
-    
-    <div class="badge">
-      <span class="badge-dot"></span>
-      <span>Now in Beta</span>
-    </div>
-    
-    <h1>Youth Soccer Rankings, Redefined.</h1>
-    <p class="tagline primary">Built on Results, Not Reputation.</p>
-    <p class="tagline">Introducing the <strong>Statbench Score™</strong> — a revolutionary performance-based system that gives every team and club a persistent score based on real match results, updated daily across multiple national platforms.</p>
-    
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title">Daily Updates</h3>
-        <p class="feature-desc">Fresh scores every day as new match results are processed and analyzed</p>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <img src="statbench-logo.png" alt="Statbench" class="logo">
+        <span class="beta-pill">Beta</span>
       </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🌍</div>
-        <h3 class="feature-title">Nationwide Coverage</h3>
-        <p class="feature-desc">Tracking leagues and tournaments across all major platforms nationwide</p>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          Youth Soccer<br>
+          <span class="gradient">Rankings</span><br>
+          Redefined
+        </h1>
+        <p>Performance-based scoring that gives every team a fair shot. No politics, no bias — just results.</p>
+        <div class="cta-group">
+          <form action="https://formspree.io/f/mrbkqpve" method="post" style="display: inline;">
+            <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input" style="display: none;" id="hero-email">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('hero-email').style.display='inline'; this.style.display='none'; document.getElementById('hero-email').focus();">
+              Get Early Access →
+            </button>
+          </form>
+          <a href="#features" class="btn btn-secondary">Learn More</a>
+        </div>
       </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3 class="feature-title">Team + Club Rankings</h3>
-        <p class="feature-desc">Comprehensive scores for individual teams and entire club programs</p>
+      <div class="hero-visual">
+        <div class="visual-card">
+          <div class="stat-preview">
+            <div>
+              <div class="stat-label">Statbench Score™</div>
+              <div class="stat-value" style="color: var(--green);">1,847</div>
+              <div class="stat-bar">
+                <div class="stat-fill" style="width: 85%; background: var(--green);"></div>
+              </div>
+            </div>
+            <div>
+              <div class="stat-label">National Rank</div>
+              <div class="stat-value" style="color: var(--yellow);">#142</div>
+              <div class="stat-bar">
+                <div class="stat-fill" style="width: 65%; background: var(--yellow);"></div>
+              </div>
+            </div>
+            <div>
+              <div class="stat-label">SOS Index</div>
+              <div class="stat-value" style="color: var(--orange);">8.4</div>
+              <div class="stat-bar">
+                <div class="stat-fill" style="width: 84%; background: var(--orange);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h3 class="feature-title">Transparent Logic</h3>
-        <p class="feature-desc">Clear, understandable scoring methodology you can trust</p>
+    </section>
+
+    <section class="features" id="features">
+      <div class="features-container">
+        <div class="features-header">
+          <h2>Built for the Future of Youth Soccer</h2>
+          <p style="color: var(--text-dim); font-size: 1.125rem;">Transparent, data-driven rankings updated daily</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Real-Time Updates</h3>
+            <p>Scores refresh daily as new match results are processed across all major platforms.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🌐</div>
+            <h3>Nationwide Coverage</h3>
+            <p>Tracking leagues and tournaments from coast to coast, no matter the platform.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🏆</div>
+            <h3>Club + Team Rankings</h3>
+            <p>See how individual teams and entire club programs stack up nationally.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔍</div>
+            <h3>Transparent Methodology</h3>
+            <p>Clear scoring logic you can understand and trust. No black boxes here.</p>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    <div class="signup-section">
-      <form action="https://formspree.io/f/mrbkqpve" method="post" class="signup-form">
-        <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input">
-        <button type="submit" class="submit-btn">Get Early Access</button>
-      </form>
-    </div>
-    
-    <footer class="footer">
+    </section>
+
+    <section class="email-capture">
+      <div class="email-container">
+        <h2>Be First to Know</h2>
+        <p>Get early access when we launch. No spam, just updates that matter.</p>
+        <form action="https://formspree.io/f/mrbkqpve" method="post" class="email-form">
+          <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input">
+          <button type="submit" class="btn btn-primary">Get Early Access</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
       <p>&copy; 2025 Statbench. All rights reserved.</p>
     </footer>
   </div>
