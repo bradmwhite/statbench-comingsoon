@@ -106,6 +106,32 @@
       letter-spacing: 0.05em;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-dim);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: var(--text);
+    }
+
+    .social-links svg {
+      width: 20px;
+      height: 20px;
+    }
+
     /* Hero Section */
     .hero {
       padding: 10rem 2rem 6rem;
@@ -162,13 +188,34 @@
     }
 
     .btn-primary {
-      background: var(--green);
+      background: linear-gradient(135deg, var(--green), var(--yellow), var(--orange));
       color: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #27AE60, #E67E22, #D35400);
+      transition: left 0.3s ease;
+    }
+
+    .btn-primary:hover::before {
+      left: 0;
     }
 
     .btn-primary:hover {
-      background: #27AE60;
       transform: translateY(-2px);
+    }
+
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
     }
 
     .btn-secondary {
@@ -428,7 +475,21 @@
     <header>
       <div class="header-content">
         <img src="statbench-logo.png" alt="Statbench" class="logo">
-        <span class="beta-pill">Beta</span>
+        <div class="header-right">
+          <div class="social-links">
+            <a href="https://instagram.com/statbench" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+              </svg>
+            </a>
+            <a href="https://x.com/statbenchsports" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+          <span class="beta-pill">Beta</span>
+        </div>
       </div>
     </header>
 
@@ -439,12 +500,17 @@
           <span class="gradient">Rankings</span><br>
           Redefined
         </h1>
-        <p>Performance-based scoring that gives every team a fair shot. No politics, no bias — just results.</p>
+        <p style="font-size: 1.5rem; font-weight: 500; color: var(--text-dim); margin-bottom: 3rem;">Built on Results. Not Reputation.</p>
+        <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(46, 204, 113, 0.05); border-left: 3px solid var(--green); border-radius: 8px;">
+          <p style="margin: 0; color: var(--text); font-size: 1rem; line-height: 1.6;">
+            Introducing the <strong style="background: linear-gradient(135deg, var(--green), var(--yellow), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Statbench Score™</strong> — a revolutionary performance-based system that gives every team and club a persistent score based on real match results, updated daily across multiple national platforms.
+          </p>
+        </div>
         <div class="cta-group">
           <form action="https://formspree.io/f/mrbkqpve" method="post" style="display: inline;">
             <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input" style="display: none;" id="hero-email">
             <button type="button" class="btn btn-primary" onclick="document.getElementById('hero-email').style.display='inline'; this.style.display='none'; document.getElementById('hero-email').focus();">
-              Get Early Access →
+              <span>Get Early Access →</span>
             </button>
           </form>
           <a href="#features" class="btn btn-secondary">Learn More</a>
@@ -516,7 +582,7 @@
         <p>Get early access when we launch. No spam, just updates that matter.</p>
         <form action="https://formspree.io/f/mrbkqpve" method="post" class="email-form">
           <input type="email" name="EMAIL" placeholder="Enter your email" required class="email-input">
-          <button type="submit" class="btn btn-primary">Get Early Access</button>
+          <button type="submit" class="btn btn-primary"><span>Get Early Access</span></button>
         </form>
       </div>
     </section>
